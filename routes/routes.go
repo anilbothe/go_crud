@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"go_crud/controllers"
+	"go_crud/controllers/api"
 	"log"
 	"net/http"
 
@@ -13,11 +13,11 @@ func InitRoutes() {
 	router := mux.NewRouter()
 	// log to stdout
 	// router.Handle("/", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(controllers.Index)))
-	router.HandleFunc("/", controllers.List).Methods(http.MethodGet)
+	router.HandleFunc("/", api.List).Methods(http.MethodGet)
 	subRouter := router.PathPrefix("/api/v1").Subrouter()
-	subRouter.HandleFunc("/create", http.HandlerFunc(controllers.Create)).Methods(http.MethodPost)
-	subRouter.HandleFunc("/{id}/edit", http.HandlerFunc(controllers.Edit)).Methods(http.MethodPut)
-	subRouter.HandleFunc("/{id}/delete", http.HandlerFunc(controllers.Destroy)).Methods(http.MethodDelete)
+	subRouter.HandleFunc("/create", http.HandlerFunc(api.Create)).Methods(http.MethodPost)
+	subRouter.HandleFunc("/{id}/edit", http.HandlerFunc(api.Edit)).Methods(http.MethodPut)
+	subRouter.HandleFunc("/{id}/delete", http.HandlerFunc(api.Destroy)).Methods(http.MethodDelete)
 
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	headersOk := handlers.AllowedHeaders([]string{"Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"})
