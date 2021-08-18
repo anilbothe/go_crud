@@ -30,7 +30,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 func Edit(w http.ResponseWriter, r *http.Request) {
 	status := http.StatusOK
 	var student model.Student
-	// sequence is imp
+
 	db.Database.First(&student, mux.Vars(r)["id"])
 
 	json.NewDecoder(r.Body).Decode(&student)
